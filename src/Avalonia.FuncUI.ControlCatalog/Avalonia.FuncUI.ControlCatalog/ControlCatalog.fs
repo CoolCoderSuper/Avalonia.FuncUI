@@ -8,6 +8,7 @@ open Avalonia.FuncUI.Elmish
 open Avalonia.FuncUI.ControlCatalog.Views
 open Avalonia.Themes.Fluent
 open Avalonia.FuncUI
+open Avalonia.FuncUI.DSL
 open Avalonia.Controls
 
 type MainWindow() as this =
@@ -24,6 +25,21 @@ type MainWindow() as this =
 
 type App() =
     inherit Application()
+
+    let menu = NativeMenu.create [
+                    NativeMenu.items [
+                        NativeMenuItem.create [
+                            NativeMenuItem.header "File"
+                            NativeMenuItem.isChecked true
+                            NativeMenuItem.isEnabled false
+                        ]
+                    ]
+                ]
+
+    let tray =
+        TrayIcon.create [
+            TrayIcon.toolTipText "Control Catalog"            
+        ]
 
     override this.Initialize() =
         this.Styles.Add (FluentTheme())
